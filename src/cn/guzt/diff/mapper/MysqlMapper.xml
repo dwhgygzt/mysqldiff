@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.guzt.diff.mapper.MysqlMapper">
+
+  <select id="getTables" resultType="com.alibaba.fastjson.JSONObject">
+   SELECT UPPER(TABLE_NAME)TABLE_NAME, TABLE_TYPE ,TABLE_COLLATION, TABLE_COMMENT
+     FROM information_schema.TABLES
+    WHERE TABLE_SCHEMA = #{dbName}
+  </select>
+
+    <select id="getColumns" resultType="com.alibaba.fastjson.JSONObject">
+      SELECT UPPER(TABLE_NAME)TABLE_NAME,UPPER(COLUMN_NAME)COLUMN_NAME,COLUMN_COMMENT,COLUMN_DEFAULT,IS_NULLABLE,COLUMN_TYPE, CHARACTER_SET_NAME,COLLATION_NAME,EXTRA
+        FROM information_schema.COLUMNS
+        WHERE TABLE_SCHEMA = #{dbName}
+    </select>
+
+    <select id="getIndexs" resultType="com.alibaba.fastjson.JSONObject">
+        SELECT UPPER(TABLE_NAME)TABLE_NAME, UPPER(INDEX_NAME)INDEX_NAME, NON_UNIQUE, GROUP_CONCAT(UPPER(COLUMN_NAME) ORDER BY SEQ_IN_INDEX) AS COLUMN_NAME
+          FROM information_schema.statistics
+         WHERE TABLE_SCHEMA = #{dbName}
+         GROUP BY UPPER(TABLE_NAME), UPPER(INDEX_NAME), NON_UNIQUE
+    </select>
+
+    <select id="getPartitions" resultType="com.alibaba.fastjson.JSONObject">
+        SELECT UPPER(TABLE_NAME)TABLE_NAME, PARTITION_NAME,PARTITION_METHOD,PARTITION_EXPRESSION,PARTITION_DESCRIPTION
+          FROM information_schema.PARTITIONS
+         WHERE TABLE_SCHEMA = #{dbName}
+           AND PARTITION_NAME IS NOT NULL
+    </select>
+    
+    <select id="getTirggers" resultType="com.alibaba.fastjson.JSONObject">
+         SELECT TRIGGER_NAME,EVENT_MANIPULATION,EVENT_OBJECT_SCHEMA,EVENT_OBJECT_TABLE,ACTION_ORIENTATION,ACTION_TIMING,ACTION_STATEMENT
+          FROM information_schema.TRIGGERS
+         WHERE TRIGGER_SCHEMA = #{dbName}
+    </select>
+
+    <select id="getProcedures" resultType="com.alibaba.fastjson.JSONObject">
+         SELECT ROUTINE_NAME, ROUTINE_COMMENT, ROUTINE_DEFINITION
+           FROM information_schema.ROUTINES
+          WHERE ROUTINE_SCHEMA = #{dbName}
+            AND ROUTINE_TYPE = 'PROCEDURE'
+    </select>
+
+    <select id="getFunctions" resultType="com.alibaba.fastjson.JSONObject">
+        SELECT ROUTINE_NAME, ROUTINE_COMMENT, ROUTINE_DEFINITION
+        FROM information_schema.ROUTINES
+        WHERE ROUTINE_SCHEMA = #{dbName}
+        AND ROUTINE_TYPE = 'FUNCTION'
+    </select>
+
+    <select id="checkDbConnect" resultType="int">
+        SELECT 1 AS COL  FROM DUAL
+    </select>
+
+</mapper>
