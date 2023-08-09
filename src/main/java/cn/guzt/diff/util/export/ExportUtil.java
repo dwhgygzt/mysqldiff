@@ -59,7 +59,7 @@ public class ExportUtil {
         Sheet sheet6 = wb.createSheet("自定义存储过程信息差异");
         createRowCell(original, target, sheet6, Constant.PROCEDURE, procedureDiff, paramCellStyle, true);
 
-        String fileName = "." + File.separator + "export" + File.separator + original.getInstanceId() + "与" + target.getInstanceId() + "比对结果" + System.currentTimeMillis() + ".xls";
+        String fileName = "export" + File.separator + original.getInstanceId() + "与" + target.getInstanceId() + "比对结果" + System.currentTimeMillis() + ".xls";
         fileName += "x";
         File file = new File(fileName);
         if (file.exists()) {

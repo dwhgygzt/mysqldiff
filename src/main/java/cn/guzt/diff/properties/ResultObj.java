@@ -9,7 +9,7 @@ public final class ResultObj{
 
     private int code;
 
-    private String msg;
+    private String msg = "FINISH";
 
     private JSONObject data;
 
