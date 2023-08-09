@@ -1,5 +1,6 @@
 package cn.guzt.diff.service.bean;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import java.util.List;
  */
 public class DiffBean implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 3496678493493861106L;
 
 

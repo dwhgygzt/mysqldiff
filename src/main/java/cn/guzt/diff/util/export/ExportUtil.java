@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class ExportUtil {
 
-    private static Logger logger = LogManager.getLogger(ExportUtil.class);
+    protected static Logger logger = LogManager.getLogger(ExportUtil.class);
 
     public static void exportDiffFile(DbProperties original, DbProperties target,
                                       List<JSONObject> tableDiff, List<JSONObject> columnDiff, List<JSONObject> indexDiff,

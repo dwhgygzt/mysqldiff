@@ -25,7 +25,7 @@ import java.util.concurrent.*;
  * @author guzt
  */
 public class DiffService {
-    private static Logger logger = LogManager.getLogger(DiffService.class);
+    protected static Logger logger = LogManager.getLogger(DiffService.class);
 
     private DiffService() {
     }
@@ -72,7 +72,7 @@ public class DiffService {
      * @param db ignore
      * @return true 正常  false  异常
      */
-    public boolean checkDbConnect(DbProperties db) {
+    public boolean isErrorDbConnect(DbProperties db) {
         boolean isOk = false;
         try (SqlSession session = MySqlSessionFactory.openSession(db)) {
             MysqlMapper mysqlMapper = session.getMapper(MysqlMapper.class);
@@ -81,7 +81,7 @@ public class DiffService {
         } catch (Exception e) {
             logger.error(db.getInstanceId() + "连接信息异常", e);
         }
-        return isOk;
+        return !isOk;
     }
 
     /**
@@ -101,7 +101,7 @@ public class DiffService {
                 logger.error("未获得数据库连接，dbInfo=" + db.toString());
                 return null;
             }
-            logger.debug("获得一个数据库连接" + session.toString());
+            logger.debug("获得一个数据库连接" + session);
             list = AbstractPrepare.getPrepareService(dbObjType).getObjList(session.getMapper(MysqlMapper.class), db);
         } catch (Exception e) {
             logger.error("获取数据库对象列表异常，dbInfo=" + db.toString(), e);
@@ -109,7 +109,7 @@ public class DiffService {
             // 关闭数据库连接
             if (session != null) {
                 session.close();
-                logger.debug("关闭一个数据库连接" + session.toString());
+                logger.debug("关闭一个数据库连接" + session);
             }
         }
         return list;

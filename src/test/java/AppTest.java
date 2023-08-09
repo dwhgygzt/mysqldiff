@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
  * @author guzt
  */
 public class AppTest {
-    private static Logger logger = LogManager.getLogger(AppTest.class);
+    protected static Logger logger = LogManager.getLogger(AppTest.class);
 
     public static void test() {
         DiffAction diffAction = new DiffAction();

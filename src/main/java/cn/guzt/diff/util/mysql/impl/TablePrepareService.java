@@ -17,6 +17,7 @@ import java.util.Map;
 /**
  * @author guzt
  */
+@SuppressWarnings("unused")
 @DiffPrepareMarker
 public class TablePrepareService extends AbstractPrepare {
 

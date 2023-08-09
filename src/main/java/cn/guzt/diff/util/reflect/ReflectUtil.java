@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class ReflectUtil {
 
-    private static Logger logger = LogManager.getLogger(ReflectUtil.class);
+    protected static Logger logger = LogManager.getLogger(ReflectUtil.class);
 
     /**
      * 得到指定包名下所有的类
@@ -34,10 +34,12 @@ public class ReflectUtil {
         ClassLoader loader = ReflectUtil.class.getClassLoader();
         //通过classloader载入包路径，得到url
         URL url = loader.getResource(packageUrl);
+        assert url != null;
         URI uri = url.toURI();
         //通过File获得uri下的所有文件
         File file = new File(uri);
         File[] files = file.listFiles();
+        assert files != null;
         for (File f : files) {
             String fName = f.getName();
             if (!fName.endsWith(".class")) {
@@ -67,8 +69,8 @@ public class ReflectUtil {
         try {
             list.forEach(item -> {
                 try {
-                    item.newInstance();
-                    logger.debug("实例化" + item.toString());
+                    item.getDeclaredConstructor().newInstance();
+                    logger.debug("实例化" + item);
                 } catch (Exception e) {
                     logger.error(e);
                 }

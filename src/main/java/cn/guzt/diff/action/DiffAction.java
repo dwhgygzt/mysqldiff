@@ -18,7 +18,7 @@ import java.util.concurrent.Future;
  * 执行比对动作
  */
 public class DiffAction {
-    private static Logger logger = LogManager.getLogger(DiffAction.class);
+    protected static Logger logger = LogManager.getLogger(DiffAction.class);
 
     /**
      * 实例化 service层对象
@@ -39,12 +39,12 @@ public class DiffAction {
         }
         
         // 1. 验证数据库是否可连通
-        if (!service.checkDbConnect(original)) {
+        if (service.isErrorDbConnect(original)) {
             resultObj.setCode(Constant.RESULT_FAILE);
             resultObj.setMsg(original.getInstanceId() + " 数据库连接失败");
             return resultObj;
         }
-        if (!service.checkDbConnect(target)) {
+        if (service.isErrorDbConnect(target)) {
             resultObj.setCode(Constant.RESULT_FAILE);
             resultObj.setMsg(target.getInstanceId() + " 数据库连接失败");
             return resultObj;

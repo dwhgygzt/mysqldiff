@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
  */
 public class Application {
 
-    private static Logger logger = LogManager.getLogger(Application.class);
+    protected static Logger logger = LogManager.getLogger(Application.class);
 
     public static void test() {
         DiffAction diffAction = new DiffAction();

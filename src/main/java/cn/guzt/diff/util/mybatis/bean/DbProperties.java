@@ -2,6 +2,7 @@ package cn.guzt.diff.util.mybatis.bean;
 
 import com.alibaba.fastjson.JSONObject;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -10,6 +11,7 @@ import java.io.Serializable;
  */
 public class DbProperties implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 3496678493493861606L;
 
     /**

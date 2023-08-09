@@ -4,6 +4,7 @@ package cn.guzt.diff.service.bean;
 import cn.guzt.diff.util.mybatis.bean.DbProperties;
 import com.alibaba.fastjson.JSONObject;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import java.util.Map;
  */
 public class DiffPrepareBean implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 3496678422493861606L;
 
 

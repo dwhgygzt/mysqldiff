@@ -20,7 +20,7 @@ import static java.util.stream.Collectors.toList;
  */
 public class CodeUtil {
 
-    private static Set<String> itemLimit = Sets.newHashSet("\n", "\r", "\r\n", " ");
+    protected static Set<String> itemLimit = Sets.newHashSet("\n", "\r", "\r\n", " ");
 
     /**
      * 存储过程或函数过滤掉注释和空行
@@ -146,8 +146,8 @@ public class CodeUtil {
         List<String> originalKeyList = original.getTargetRowKey();
         List<String> targetKeyList = target.getTargetRowKey();
 
-        List<String> originalReduceKeyList = originalKeyList.stream().filter(item -> !targetKeyList.contains(item)).collect(toList());
-        List<String> targetReduceKeyList = targetKeyList.stream().filter(item -> !originalKeyList.contains(item)).collect(toList());
+        List<String> originalReduceKeyList = originalKeyList.stream().filter(item -> !targetKeyList.contains(item)).toList();
+        List<String> targetReduceKeyList = targetKeyList.stream().filter(item -> !originalKeyList.contains(item)).toList();
         // original数据库对象在target数据库中不存在的对象列表
         List<JSONObject> targetNotExistRow = originalReduceKeyList.parallelStream().map(originalRow::get).collect(toList());
 
